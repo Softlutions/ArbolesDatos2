@@ -1,22 +1,25 @@
 #pragma once
 #include "stdafx.h"
-template<typename T>
-class Nodo<T>
+
+class Nodo
 {
+private:
+	int data;
+	Nodo *izq;
+	Nodo *der;
+
 public:
 	Nodo();
 	~Nodo();
 
-	Nodo(T data);
+	Nodo(int);
 
-	Nodo<T> getIzq();
-	void setIzq();
+	int getData();
+	void setData(int);
 
-	Nodo<T> getDer();
-	void setDer();
-private:
-	T data;
-	Nodo<T> izq;
-	Nodo<T> der;
+	Nodo *getIzq();
+	void setIzq(Nodo *);
+
+	Nodo *getDer();
+	void setDer(Nodo *);
 };
-

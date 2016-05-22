@@ -27,15 +27,24 @@
     <ClInclude Include="Nodo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Trees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Arbol.cpp">
+    <ClCompile Include="Nodo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Nodo.cpp">
+    <ClCompile Include="Trees.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
