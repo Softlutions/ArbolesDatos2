@@ -10,4 +10,9 @@ void insert();
 void printTree();
 void searchMin();
 void searchMax();
-
+void isLeaf();
+void isEmpty();
+void weight();
+void countLeaf();
+void clearTree();
+void deleteNodo();

@@ -9,7 +9,7 @@ Tree::~Tree()
 {
 }
 
-Nodo *Tree::getRoot()
+Nodo *&Tree::getRoot()
 {
 	return root;
 }
@@ -19,7 +19,7 @@ void Tree::setRoot(Nodo *_root)
 	root = _root;
 }
 
-void Tree::insertElem(int data, Nodo *a)
+void Tree::insertElem(int data, Nodo *&a)
 {
 	if (a == nullptr) {
 		a = new Nodo(data);
@@ -45,22 +45,54 @@ void Tree::insertElem(int data)
 
 bool Tree::deleteElem(int data)
 {
+	Nodo *aux = searchElem(data);
+	if (aux != nullptr) {
+		DeleteNodo(aux);
+		return true;
+	}
 	return false;
+}
+
+int Tree::weight(Nodo *_a) {
+	if(_a != NULL)
+		return 1 + weight(_a->getIzq()) + weight(_a->getDer());
+	
+	return 0;
 }
 
 int Tree::weight()
 {
+	return weight(getRoot());
+}
+
+int Tree::countLeaf(Nodo *_a) {
+	if (_a != NULL) {
+		if (_a->getIzq() == NULL && _a->getDer() == NULL)
+			return 1;
+		else
+			return countLeaf(_a->getIzq()) + countLeaf(_a->getDer());
+	}
+
 	return 0;
 }
 
 int Tree::countLeaf()
 {
-	return 0;
+	return countLeaf(getRoot());
 }
 
 bool Tree::isEmpty()
 {
 	return getRoot() == nullptr;
+}
+
+void Tree::preOrder(Nodo *_a)
+{
+	if (_a != nullptr) {
+		cout << _a->getData() << "\n";
+		preOrder(_a->getIzq());
+		preOrder(_a->getDer());
+	}
 }
 
 void Tree::inOrder(Nodo *_a)
@@ -72,9 +104,28 @@ void Tree::inOrder(Nodo *_a)
 	}
 }
 
-void Tree::printTree()
+void Tree::postOrder(Nodo *_a)
 {
-	inOrder(getRoot());
+	if (_a != nullptr) {
+		postOrder(_a->getIzq());
+		postOrder(_a->getDer());
+		cout << _a->getData() << "\n";
+	}
+}
+
+/*
+0: pre order
+1: in order
+2: post order
+*/
+void Tree::printTree(int order)
+{
+	if (order == 0)
+		preOrder(getRoot());
+	else if (order == 1)
+		inOrder(getRoot());
+	else
+		postOrder(getRoot());
 }
 
 int Tree::searchMax()
@@ -106,23 +157,28 @@ int Tree::SearchMin(Nodo *a)
 	}
 }
 
-int Tree::DeleteMin(Nodo *a)
+void Tree::DeleteNodo(Nodo *a, int x)
 {
-	int data;
-
-	if (a->getIzq() == nullptr) {
-		if (a->getDer() != nullptr) {
-			a->setData(a->getDer()->getData());
-			a->setDer(a->getDer()->getDer());
-		} else {
-			// terminar
-			data = a->getData();
+	if (a != NULL) {
+		if (a->getData() == x) {
 			delete a;
-			return data;
 		}
-		return a->getData();
-	} else {
-		return DeleteMin(a->getIzq());
+		else {
+			if (a->getData() > x) {
+				DeleteNodo(a->getIzq(), x);
+				
+				if (a->getIzq()->getData() == x) {
+					a->setIzq(NULL);
+				}
+			}
+			else {
+				DeleteNodo(a->getDer(), x);
+
+				if (a->getDer()->getData() == x) {
+					a->setDer(NULL);
+				}
+			}
+		}
 	}
 }
 
@@ -143,22 +199,14 @@ void Tree::DeleteNodo(Nodo *a)
 			delete aux;
 		}
 		else {
-			a->setData(DeleteMin(a->getDer()));
+			x = SearchMin(a->getDer());
+			a->setData(x);
+			DeleteNodo(a->getDer(), x);
 		}
 	}
 }
 
-bool Tree::deleteNodo(int data)
-{
-	Nodo *aux = searchElem(data);
-	if (aux != nullptr) {
-		DeleteNodo(aux);
-		return true;
-	}
-	return false;
-}
-
-Nodo * Tree::SearchElem(Nodo *a, int data)
+Nodo *Tree::SearchElem(Nodo *a, int data)
 {
 	if (a != nullptr) {
 		
@@ -167,17 +215,18 @@ Nodo * Tree::SearchElem(Nodo *a, int data)
 		} 
 		else {
 			if (data < a->getData()) {
-				SearchElem(a->getIzq(), data);
+				return SearchElem(a->getIzq(), data);
 			}
 			else {
-				SearchElem(a->getDer(), data);
+				return SearchElem(a->getDer(), data);
 			}
 		}
 	}
+
 	return nullptr;
 }
 
-Nodo * Tree::searchElem(int data)
+Nodo *Tree::searchElem(int data)
 {
 	return SearchElem(getRoot(), data);
 }
@@ -188,34 +237,23 @@ int Tree::IsLeaf(Nodo *a, int data)
 		Nodo *temp = SearchElem(getRoot(), data);
 
 		if (temp != nullptr) {
-			if (temp->getDer() == nullptr && temp->getIzq() == nullptr) {
+			if (temp->getDer() == nullptr && temp->getIzq() == nullptr)
 				return 1;
-			}
-		} else {
-			return 2;
+			else
+				return 2;
 		}
-	} else {
-		return 0;
 	}
+	
+	return 0;
 }
 
 // Return:
-// 0 if tree is empy
+// 0 if nodo not exists
 // 1 if nodo is leaf
 // 2 if nodo is not leaf
 int Tree::isLeaf(int data)
 {
 	return IsLeaf(getRoot(), data);
-}
-
-int Tree::CountLeaf(Nodo *a, int count)
-{	
-	return 0;
-}
-
-int Tree::countLeaf()
-{
-	return 0;
 }
 
 void Tree::DeleteTree(Nodo *a)

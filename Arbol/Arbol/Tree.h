@@ -6,18 +6,22 @@ class Tree
 private:
 	Nodo *root;
 
-	Nodo *getRoot();
+	Nodo *&getRoot();
 	void setRoot(Nodo *);
+	void preOrder(Nodo *);
 	void inOrder(Nodo *);
-	void insertElem(int, Nodo *);
+	void postOrder(Nodo *);
+	void insertElem(int, Nodo *&);
 	int SearchMax(Nodo *);
 	int SearchMin(Nodo *);
 	void DeleteNodo(Nodo *);
-	int DeleteMin(Nodo *);
-	Nodo * SearchElem(Nodo *, int);
+	void DeleteNodo(Nodo *, int);
+	Nodo *SearchElem(Nodo *, int);
 	int IsLeaf(Nodo *, int);
 	void DeleteTree(Nodo *);
-	int CountLeaf(Nodo *, int);
+	int weight(Nodo *);
+	int countLeaf(Nodo * );
+
 public:
 	Tree();
 	~Tree();
@@ -28,12 +32,10 @@ public:
 	int isLeaf(int);
 	int countLeaf();
 	bool isEmpty();
-	void printTree();
+	void printTree(int);
 	int searchMax();
 	int searchMin();
-	bool deleteNodo(int);
-	Nodo * searchElem(int);
-	bool isLeaf(int);
+	Nodo *searchElem(int);
 	void deleteTree();
 };
 

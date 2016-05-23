@@ -29,7 +29,7 @@ void Nodo::setData(int _data)
 	data = _data;
 }
 
-Nodo * Nodo::getIzq()
+Nodo *&Nodo::getIzq()
 {
 	return izq;
 }
@@ -39,7 +39,7 @@ void Nodo::setIzq(Nodo *_izq)
 	izq = _izq;
 }
 
-Nodo * Nodo::getDer()
+Nodo *&Nodo::getDer()
 {
 	return der;
 }

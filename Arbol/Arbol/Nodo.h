@@ -17,9 +17,9 @@ public:
 	int getData();
 	void setData(int);
 
-	Nodo *getIzq();
+	Nodo *&getIzq();
 	void setIzq(Nodo *);
 
-	Nodo *getDer();
+	Nodo *&getDer();
 	void setDer(Nodo *);
 };
