@@ -16,3 +16,6 @@ void weight();
 void countLeaf();
 void clearTree();
 void deleteNodo();
+void isComplete();
+void height();
+void iqualsTree();

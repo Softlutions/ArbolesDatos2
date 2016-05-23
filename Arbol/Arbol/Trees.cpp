@@ -20,13 +20,16 @@ void showMenu()
 		"2- Print tree" << "\n" <<
 		"3- Search min" << "\n" <<
 		"4- Search max" << "\n" <<
-		"5- IsLeaf" << "\n" <<
-		"6- IsEmpty" << "\n" <<
+		"5- Is leaf" << "\n" <<
+		"6- Is empty" << "\n" <<
 		"7- Weight" << "\n" <<
 		"8- Count leaf" << "\n" <<
 		"9- Clear tree" << "\n" <<
 		"10- Delete" << "\n" <<
-		"11- Exit." << "\n";
+		"11- Is complete" << "\n" <<
+		"12- Height" << "\n" <<
+		"13- Iquals tree" << "\n" <<
+		"14- Exit." << "\n";
 	executeOption();
 }
 
@@ -57,13 +60,19 @@ void executeOption()
 		break;
 	case 10: deleteNodo();
 		break;
-	case 11: system("pause");
+	case 11: isComplete();
+		break;
+	case 12: height();
+		break;
+	case 13: iqualsTree();
+		break;
+	case 14: system("pause");
 		break;
 	default: cout << "Invalid option." << "\n" << "\n";
 		break;
 	}
 
-	if (option != 11) {
+	if (option != 14) {
 		showMenu();
 	}
 }
@@ -140,4 +149,19 @@ void deleteNodo() {
 
 	bool result = tree->deleteElem(value);
 	cout << (result ? "Success" : "Error") << "\n\n";
+}
+
+void isComplete()
+{
+	cout << (tree->isComplete() ? "Tree is complete." : "Tree is not complete.") << "\n\n";
+}
+
+void height()
+{
+	cout << "The height is: " << tree->height() << "\n\n";
+}
+
+void iqualsTree()
+{
+	cout << (tree->iquals(tree, tree) ? "Trees are iquals." : "Trees are not iquals.") << "\n\n";
 }

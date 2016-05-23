@@ -66,8 +66,8 @@ int Tree::weight()
 }
 
 int Tree::countLeaf(Nodo *_a) {
-	if (_a != NULL) {
-		if (_a->getIzq() == NULL && _a->getDer() == NULL)
+	if (_a != nullptr) {
+		if (_a->getIzq() == nullptr && _a->getDer() == nullptr)
 			return 1;
 		else
 			return countLeaf(_a->getIzq()) + countLeaf(_a->getDer());
@@ -270,4 +270,62 @@ void Tree::deleteTree()
 	DeleteTree(getRoot());
 	setRoot(nullptr);
 	cout << "Tree is empy." << "\n" << "\n";
+}
+
+int Tree::isComplete(Nodo *_a) {
+	if (_a != nullptr) {
+		if (_a->getIzq() == nullptr ^ _a->getDer() == nullptr)
+			return 1;
+		else
+			return isComplete(_a->getIzq()) + isComplete(_a->getDer());
+	}
+
+	return 0;
+}
+
+bool Tree::isComplete()
+{
+	return isComplete(getRoot()) == 0;
+}
+
+int Tree::max(int data1, int data2)
+{
+	if (data1 >= data2)
+		return data1;
+	else
+		return data2;
+}
+
+int Tree::Height(Nodo *a)
+{
+	if (a == nullptr) {
+		return 0;
+	} else {
+		int alt = 1 + max(Height(a->getIzq()), Height(a->getDer()));
+		return alt;
+	}
+}
+
+int Tree::height()
+{
+	return Height(getRoot());
+}
+
+bool Tree::Iquals(Nodo *&a, Nodo *&b) {
+	if (a == nullptr && b == nullptr)
+		return true;
+	else {
+		if (a == nullptr || b == nullptr)
+			return false;
+		else {
+			if (a->getData() == b->getData())
+				return Iquals(a->getIzq(), b->getIzq()) && Iquals(a->getDer(), b->getDer());
+			else
+				return false;
+		}
+	}
+}
+
+bool Tree::iquals(Tree *a, Tree *b) {
+	return Iquals(a->getRoot(), b->getRoot());
 }

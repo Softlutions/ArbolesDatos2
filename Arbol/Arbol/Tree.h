@@ -20,7 +20,11 @@ private:
 	int IsLeaf(Nodo *, int);
 	void DeleteTree(Nodo *);
 	int weight(Nodo *);
-	int countLeaf(Nodo * );
+	int countLeaf(Nodo *);
+	int isComplete(Nodo *);
+	int Height(Nodo *);
+	int max(int, int);
+	bool Iquals(Nodo *&, Nodo *&);
 
 public:
 	Tree();
@@ -37,5 +41,8 @@ public:
 	int searchMin();
 	Nodo *searchElem(int);
 	void deleteTree();
+	bool isComplete();
+	int height();
+	bool iquals(Tree *, Tree *);
 };
 
