@@ -172,10 +172,10 @@ Nodo * Tree::SearchElem(Nodo *a, int data)
 		} 
 		else {
 			if (data < a->getData()) {
-				inOrder(a->getIzq());
+				SearchElem(a->getIzq(), data);
 			}
 			else {
-				inOrder(a->getDer());
+				SearchElem(a->getDer(), data);
 			}
 		}
 	}
@@ -187,23 +187,28 @@ Nodo * Tree::searchElem(int data)
 	return SearchElem(getRoot(), data);
 }
 
-bool Tree::IsLeaf(Nodo *a, int data)
+int Tree::IsLeaf(Nodo *a, int data)
 {
 	if (a != nullptr) {
-		IsLeaf(a->getIzq(), data);
-		if (a->getData() == a->getData()) {
-			if (a->getDer() == nullptr && a->getIzq() == nullptr) {
-				return true;
+		Nodo *temp = SearchElem(getRoot(), data);
+
+		if (temp != nullptr) {
+			if (temp->getDer() == nullptr && temp->getIzq() == nullptr) {
+				return 1;
 			}
-			else {
-				return false;
-			}
+		} else {
+			return 2;
 		}
-		IsLeaf(a->getDer(), data);
+	} else {
+		return 0;
 	}
 }
 
-bool Tree::isLeaf(int data)
+// Return:
+// 0 if tree is empy
+// 1 if nodo is leaf
+// 2 if nodo is not leaf
+int Tree::isLeaf(int data)
 {
 	return IsLeaf(getRoot(), data);
 }

@@ -15,7 +15,7 @@ private:
 	void DeleteNodo(Nodo *);
 	int DeleteMin(Nodo *);
 	Nodo * SearchElem(Nodo *, int);
-	bool IsLeaf(Nodo *, int);
+	int IsLeaf(Nodo *, int);
 	void DeleteTree(Nodo *);
 	int CountLeaf(Nodo *, int);
 public:
@@ -25,7 +25,7 @@ public:
 	void insertElem(int);
 	bool deleteElem(int);
 	int weight();
-	bool isLeaf();
+	int isLeaf(int);
 	int countLeaf();
 	bool isEmpty();
 	void printTree();
