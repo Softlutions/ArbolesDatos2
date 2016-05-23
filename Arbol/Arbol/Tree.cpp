@@ -2,6 +2,7 @@
 
 Tree::Tree()
 {
+	setRoot(nullptr);
 }
 
 Tree::~Tree()
@@ -18,7 +19,7 @@ void Tree::setRoot(Nodo *_root)
 	root = _root;
 }
 
-void Tree::insertElem(int data, Nodo * a)
+void Tree::insertElem(int data, Nodo *a)
 {
 	if (a == nullptr) {
 		a = new Nodo(data);
@@ -35,7 +36,11 @@ void Tree::insertElem(int data, Nodo * a)
 
 void Tree::insertElem(int data)
 {
-	insertElem(data, getRoot());
+	if (isEmpty()) {
+		setRoot(new Nodo(data));
+	} else {
+		insertElem(data, getRoot());
+	}	
 }
 
 bool Tree::deleteElem(int data)
@@ -63,15 +68,11 @@ bool Tree::isEmpty()
 	return getRoot() == nullptr;
 }
 
-void Tree::deleteTree()
-{
-}
-
 void Tree::inOrder(Nodo *_a)
 {
 	if (_a != nullptr) {
 		inOrder(_a->getIzq());
-		cout << _a->getData();
+		cout << _a->getData() << "\n";
 		inOrder(_a->getDer());
 	}
 }
@@ -186,7 +187,7 @@ Nodo * Tree::searchElem(int data)
 	return SearchElem(getRoot(), data);
 }
 
-bool Tree::IsLeaf(Nodo *a, int data) // terminar (validar si el dato no existe)
+bool Tree::IsLeaf(Nodo *a, int data)
 {
 	if (a != nullptr) {
 		IsLeaf(a->getIzq(), data);
@@ -205,4 +206,30 @@ bool Tree::IsLeaf(Nodo *a, int data) // terminar (validar si el dato no existe)
 bool Tree::isLeaf(int data)
 {
 	return IsLeaf(getRoot(), data);
+}
+
+int Tree::CountLeaf(Nodo *a, int count)
+{	
+	return 0;
+}
+
+int Tree::countLeaf()
+{
+	return 0;
+}
+
+void Tree::DeleteTree(Nodo *a)
+{
+	if (a != nullptr) {
+		DeleteTree(a->getIzq());
+		DeleteTree(a->getDer());
+		delete a;
+	}
+}
+
+void Tree::deleteTree()
+{
+	DeleteTree(getRoot());
+	setRoot(nullptr);
+	cout << "Tree is empy." << "\n" << "\n";
 }

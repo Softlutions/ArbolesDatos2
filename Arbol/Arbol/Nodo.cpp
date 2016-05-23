@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "Nodo.h"
 
-template<typename T>
 Nodo::Nodo()
 {
-	this->setData(nullptr);
+	this->setData(NULL);
 	this->setIzq(nullptr);
 	this->setDer(nullptr);
 }
