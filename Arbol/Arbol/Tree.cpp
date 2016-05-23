@@ -53,11 +53,6 @@ int Tree::weight()
 	return 0;
 }
 
-bool Tree::isLeaf()
-{
-	return false;
-}
-
 int Tree::countLeaf()
 {
 	return 0;
