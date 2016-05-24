@@ -25,6 +25,7 @@ private:
 	int Height(Nodo *);
 	int max(int, int);
 	bool Iquals(Nodo *&, Nodo *&);
+	bool hasPath(Nodo *, int);
 
 public:
 	Tree();
@@ -44,5 +45,6 @@ public:
 	bool isComplete();
 	int height();
 	bool iquals(Tree *, Tree *);
+	bool hasPath(int, int);
 };
 

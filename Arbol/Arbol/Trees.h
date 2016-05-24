@@ -19,3 +19,5 @@ void deleteNodo();
 void isComplete();
 void height();
 void iqualsTree();
+void hasPath();
+void fillTree();

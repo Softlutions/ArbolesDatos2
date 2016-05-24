@@ -329,3 +329,25 @@ bool Tree::Iquals(Nodo *&a, Nodo *&b) {
 bool Tree::iquals(Tree *a, Tree *b) {
 	return Iquals(a->getRoot(), b->getRoot());
 }
+
+bool Tree::hasPath(Nodo *n, int value) {
+	if (n != nullptr) {
+		if (n->getData() == value) {
+			return true;
+		}
+		else {
+			return hasPath(n->getIzq() ,value) || hasPath(n->getDer(), value);
+		}
+	}
+
+	return false;
+}
+
+bool Tree::hasPath(int from, int value) {
+	Nodo *n = searchElem(from);
+
+	if(n != NULL)
+		return hasPath(n, value);
+
+	return false;
+}

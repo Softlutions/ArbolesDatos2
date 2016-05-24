@@ -14,8 +14,7 @@ int main()
 
 void showMenu()
 {
-	cout << "--  Welcome to Tree --" << "\n" <<
-		"Type the option: " << "\n" <<
+	cout << "\n--  Welcome to Tree --" << "\n\n" <<
 		"1- Insert" << "\n" <<
 		"2- Print tree" << "\n" <<
 		"3- Search min" << "\n" <<
@@ -29,14 +28,18 @@ void showMenu()
 		"11- Is complete" << "\n" <<
 		"12- Height" << "\n" <<
 		"13- Iquals tree" << "\n" <<
-		"14- Exit." << "\n";
+		"14- Has path" << "\n" <<
+		"15- Fill tree" << "\n" <<
+		"16- Exit" << "\n\n";
 	executeOption();
 }
 
 void executeOption()
 {
 	int option;
+	cout << "Your option: ";
 	cin >> option;
+	cout << "\n\n";
 
 	switch (option)
 	{
@@ -66,13 +69,17 @@ void executeOption()
 		break;
 	case 13: iqualsTree();
 		break;
-	case 14: system("pause");
+	case 14: hasPath();
+		break;
+	case 15: fillTree();
+		break;
+	case 16: system("pause");
 		break;
 	default: cout << "Invalid option." << "\n" << "\n";
 		break;
 	}
 
-	if (option != 14) {
+	if (option != 16) {
 		showMenu();
 	}
 }
@@ -164,4 +171,31 @@ void height()
 void iqualsTree()
 {
 	cout << (tree->iquals(tree, tree) ? "Trees are iquals." : "Trees are not iquals.") << "\n\n";
+}
+
+void hasPath() {
+	int from;
+	int value;
+	
+	cout << "Start from: \n";
+	cin >> from;
+
+	cout << "Value to check: \n";
+	cin >> value;
+
+	cout << "Path exists: " << (tree->hasPath(from, value) ? "Y" : "N") << "\n\n";
+}
+
+void fillTree() {
+	if (!tree->isEmpty())
+		cout << "The tree already has elements\n";
+	else {
+		tree->insertElem(10);
+		tree->insertElem(5);
+		tree->insertElem(15);
+		tree->insertElem(20);
+		tree->insertElem(18);
+		cout << "Tree is full, printing elements in order\n";
+		tree->printTree(1);
+	}
 }
