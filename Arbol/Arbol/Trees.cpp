@@ -24,13 +24,12 @@ void showMenu()
 		"7- Weight" << "\n" <<
 		"8- Count leaf" << "\n" <<
 		"9- Clear tree" << "\n" <<
-		"10- Delete" << "\n" <<
-		"11- Is complete" << "\n" <<
-		"12- Height" << "\n" <<
-		"13- Iquals tree" << "\n" <<
-		"14- Has path" << "\n" <<
-		"15- Fill tree" << "\n" <<
-		"16- Exit" << "\n\n";
+		"10- Is complete" << "\n" <<
+		"11- Height" << "\n" <<
+		"12- Iquals tree" << "\n" <<
+		"13- Has path" << "\n" <<
+		"14- Fill tree" << "\n" <<
+		"15- Exit" << "\n\n";
 	executeOption();
 }
 
@@ -61,25 +60,23 @@ void executeOption()
 		break;
 	case 9: clearTree();
 		break;
-	case 10: deleteNodo();
+	case 10: isComplete();
 		break;
-	case 11: isComplete();
+	case 11: height();
 		break;
-	case 12: height();
+	case 12: iqualsTree();
 		break;
-	case 13: iqualsTree();
+	case 13: hasPath();
 		break;
-	case 14: hasPath();
+	case 14: fillTree();
 		break;
-	case 15: fillTree();
-		break;
-	case 16: system("pause");
+	case 15: system("pause");
 		break;
 	default: cout << "Invalid option." << "\n" << "\n";
 		break;
 	}
 
-	if (option != 16) {
+	if (option != 15) {
 		showMenu();
 	}
 }
@@ -100,8 +97,9 @@ void printTree()
 	cout << "0 - pre  order\n";
 	cout << "1 - in   order\n";
 	cout << "2 - post order\n";
-	cout << "Type a value: \n\n";
+	cout << "Type a value: ";
 	cin >> order;
+	cout << "\n\n";
 
 	if (order >= 0 && order <= 2)
 		tree->printTree(order);

@@ -192,17 +192,17 @@ void Tree::DeleteNodo(Nodo *a)
 		a = aux->getDer();
 		delete aux;
 	}
+	else if (a->getDer() == nullptr) {
+		aux = a;
+		a = a->getIzq();
+		delete aux;
+	}
 	else {
-		if (a->getDer() == nullptr) {
-			aux = a;
-			a = a->getIzq();
-			delete aux;
-		}
-		else {
-			x = SearchMin(a->getDer());
-			a->setData(x);
-			DeleteNodo(a->getDer(), x);
-		}
+		x = SearchMin(a->getDer());
+		a->setData(x);
+		aux = a;
+		DeleteNodo(a->getDer(), x);
+		aux->setDer(NULL);
 	}
 }
 
@@ -269,7 +269,7 @@ void Tree::deleteTree()
 {
 	DeleteTree(getRoot());
 	setRoot(nullptr);
-	cout << "Tree is empy." << "\n" << "\n";
+	cout << "Tree is empty." << "\n" << "\n";
 }
 
 int Tree::isComplete(Nodo *_a) {
